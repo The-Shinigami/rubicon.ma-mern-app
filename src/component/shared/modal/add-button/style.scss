@@ -1,0 +1,22 @@
+.add-button {
+    margin-top: 10px;
+    background-color: white!important;
+    color: #941feb!important;
+    font-family: sans-serif!important;
+    font-size: large!important;
+    border-radius: 5px!important;
+    border-color: white!important;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05)!important;
+  
+    &:hover {
+      color:white!important;
+      background-color: #941feb!important;
+    }
+    &:hover .svg-icon path{
+        stroke:white!important;
+      }
+
+    .svg-icon path{
+        stroke: #941feb; // Default fill color
+      }
+  }

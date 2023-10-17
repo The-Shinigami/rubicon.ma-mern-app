@@ -1,0 +1,24 @@
+
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+  
+    .add-button-element {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-end; 
+    width: 100%;
+    }
+  
+    .content-container {
+      display: flex;
+      justify-content: baseline; // Center the buttons horizontally
+      width: 100%;
+     
+    }
+  }
+  
+  
