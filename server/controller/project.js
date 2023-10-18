@@ -1,8 +1,26 @@
 
 const { Project } = require('../model/project');
+const { Task } = require('../model/task');
 
 // Create a new project
 const createProject = async (req, res) => {
+
+  const requiredFields = ['label', 'description','status', 'starting_date', 'ending_date']; 
+  const nameFields = {
+    'label':'Label',
+    'description':'Description',
+    'status':'Status',
+    'starting_date' : 'Started At',
+    'ending_date' : 'Ended At'
+  }
+  const missingFields = requiredFields.filter((field) => !req.body[field]).map(f => nameFields[f]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      error: ['Missing required fields',...missingFields]
+    });
+  }
+
   try {
     const project = new Project(req.body);
     await project.save();
@@ -38,6 +56,23 @@ const getProjectById = async (req, res) => {
 
 // Update a project by ID
 const updateProjectById = async (req, res) => {
+  
+  const requiredFields = ['label', 'description','status', 'starting_date', 'ending_date']; // Replace with your required fields
+  const nameFields = {
+    'label':'Label',
+    'description':'Description',
+    'status':'Status',
+    'starting_date' : 'Started At',
+    'ending_date' : 'Ended At'
+  }
+  const missingFields = requiredFields.filter((field) => !req.body[field]).map(f => nameFields[f]);
+
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      error: ['Missing required fields',...missingFields]
+    });
+  }
+
   const projectId = req.params.projectId;
   try {
     const project = await Project.findByIdAndUpdate(projectId, req.body, { new: true });
@@ -53,6 +88,14 @@ const updateProjectById = async (req, res) => {
 // Delete a project by ID
 const deleteProjectById = async (req, res) => {
   const projectId = req.params.projectId;
+    
+    const tasksCount = await Task.countDocuments({ project: projectId });
+
+    if (tasksCount > 0) {
+      
+      return res.status(400).json({ error: 'Cannot delete project its associated with tasks' });
+    }
+
   try {
     const project = await Project.findByIdAndRemove(projectId);
     if (!project) {

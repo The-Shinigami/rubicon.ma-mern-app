@@ -1,20 +1,25 @@
 // components/Navbar/index.js
 
 import React, { useState } from "react";
+import { useLocation } from 'react-router-dom'
 
 import Button from "../shared/navbar-button/button";
 import './style.scss'
 const Navbar = () => {
-  const [activeButton, setActiveButton] = useState(0);
+  const location = useLocation();
+
+  const [activeButton, setActiveButton] = useState(location.pathname);
   const buttons = [
-    { title: 'Projects',link:'/project', index: 0 },
-    { title: 'Tasks',link:'/task', index: 1 },
+    { title: 'Projects',link:'/project', index: '/project' },
+    { title: 'Tasks',link:'/task', index: '/task' },
   ];
   const handleButtonClick = (buttonIndex) => {
     setActiveButton(buttonIndex);
   };
+
+ 
 	return (
-		<div className="grid-container">
+		<div className="grid-container container">
     <h1 className="title">Rubicon Coding challenge</h1>
     <div className="button-container">
     {buttons.map((button, index) => (
