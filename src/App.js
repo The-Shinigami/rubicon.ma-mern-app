@@ -29,7 +29,6 @@ const store = configureStore(initialState, history);
   <Routes>  
      <Route path="task" element={<Task/>} />
      <Route path="/" element={<Project/>} />
-     <Route path="project" element={<Project/>} />
    </Routes>
    </BrowserRouter>
    </Provider>

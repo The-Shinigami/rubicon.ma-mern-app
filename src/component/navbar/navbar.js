@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const [activeButton, setActiveButton] = useState(location.pathname);
   const buttons = [
-    { title: 'Projects',link:'/project', index: '/project' },
+    { title: 'Projects',link:'/', index: '/' },
     { title: 'Tasks',link:'/task', index: '/task' },
   ];
   const handleButtonClick = (buttonIndex) => {

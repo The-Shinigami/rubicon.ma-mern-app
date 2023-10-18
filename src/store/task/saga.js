@@ -65,7 +65,7 @@ function* getTasks() {
 function* updateTask(action) {
   try {
     const task = action.payload;
-    const request = yield axios.put(ENDPOINTS.TASKS + '/' + task.id, task);
+    const request = yield axios.put(ENDPOINTS.TASKS + '/' + task['_id'], task);
 
     notification('success', UPDATE_TASK_SUCCESS_MESSAGE)
     yield put({
